@@ -3,9 +3,17 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { motion } from 'framer-motion'
-import { Sword, Trophy, Users, Building } from 'lucide-react'
+import { Sword, Trophy, Users, Building, Flame } from 'lucide-react'
+import { DifficultySelector } from '@/components/game/DifficultySelector'
+import { useState } from 'react'
 
 export default function Home() {
+  const [showMaxWar, setShowMaxWar] = useState(false)
+  
+  if (showMaxWar) {
+    return <DifficultySelector />
+  }
+  
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
       <motion.div
@@ -22,7 +30,7 @@ export default function Home() {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2 }}
             >
-              Clash of Clans
+              Game Portal
             </motion.h1>
             <motion.p 
               className="text-gray-600 text-lg"
@@ -30,7 +38,7 @@ export default function Home() {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.3 }}
             >
-              Build, Train, Battle!
+              Choose Your Adventure!
             </motion.p>
           </div>
           
@@ -64,11 +72,40 @@ export default function Home() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
-            <Link href="/village" className="block">
-              <Button variant="primary" size="lg" className="w-full text-xl">
-                Play Now
+            {/* MaxWar - New 3D Game */}
+            <div className="bg-gradient-to-r from-amber-100 to-orange-100 p-6 rounded-xl border-2 border-orange-300">
+              <div className="flex items-center gap-3 mb-3">
+                <Flame className="w-10 h-10 text-orange-600" />
+                <div>
+                  <h2 className="text-2xl font-bold text-orange-800">MaxWar</h2>
+                  <p className="text-sm text-orange-600">3D Real-Time Strategy</p>
+                </div>
+              </div>
+              <p className="text-sm text-gray-700 mb-4">
+                Build your empire, train armies, and conquer enemies in stunning 3D! 
+                Inspired by Age of Empires with multiple difficulty levels.
+              </p>
+              <Button 
+                onClick={() => setShowMaxWar(true)}
+                className="w-full bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700"
+                size="lg"
+              >
+                Play MaxWar (NEW!)
               </Button>
-            </Link>
+            </div>
+            
+            {/* Original Clash of Clans */}
+            <div className="bg-gradient-to-r from-purple-100 to-pink-100 p-4 rounded-xl border border-purple-200">
+              <h3 className="font-bold text-purple-800 mb-2">Classic Clash of Clans</h3>
+              <p className="text-xs text-gray-600 mb-3">
+                The original 2D strategy game with campaign missions
+              </p>
+              <Link href="/village" className="block">
+                <Button variant="outline" size="lg" className="w-full">
+                  Play Classic Mode
+                </Button>
+              </Link>
+            </div>
             
             <div className="text-center text-sm text-gray-500">
               Your progress is automatically saved
@@ -81,14 +118,16 @@ export default function Home() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.6 }}
           >
-            <div className="font-semibold text-center">Features:</div>
+            <div className="font-semibold text-center">MaxWar Features:</div>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
-              <li>✓ Build and upgrade buildings</li>
-              <li>✓ Train troops (Barbarians, Archers, Giants)</li>
-              <li>✓ Complete campaign missions</li>
-              <li>✓ Resource management (Gold & Elixir)</li>
-              <li>✓ Auto-save progress</li>
-              <li>✓ Town Hall up to level 5</li>
+              <li>✓ Full 3D Graphics with Three.js</li>
+              <li>✓ Real-time strategy gameplay</li>
+              <li>✓ 4 Difficulty levels</li>
+              <li>✓ Build houses, barracks, farms & more</li>
+              <li>✓ Train soldiers, archers & cavalry</li>
+              <li>✓ Enemy AI and battles</li>
+              <li>✓ Resource management system</li>
+              <li>✓ Population mechanics</li>
             </ul>
           </motion.div>
         </div>
